@@ -1,2 +1,2 @@
 # CSharp_Lectures
-DICT Training
+July 3-24, 2017
