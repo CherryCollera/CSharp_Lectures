@@ -1,0 +1,124 @@
+Topic: ASP.NET MVC
+
+
+Model view controller
+using System.Web.Mvc
+
+
+models -data, data manipulation
+-user object
+-.cs
+
+views- .cshtml files
+-UI
+-login
+
+controllers-processes related to registration
+-method()
+-authenticate user()
+-.cs
+-there are action methods
+-in controller we add a using directive ex.using MVCSuccinctly.Models; 
+-In addition to creating the controller that we just looked at, 
+the template will create initial versions of the supporting views needed for this controller
+-Our view is written using the Razor view engine
+
+
+To effectively use MVC, adhere to the following best practices: 
+The model should be a simple object with read and write properties to support a single view.
+ The view should focus on standards-based markup. 
+Logic in the view should be limited to user interaction and not include business logic.
+ Controllers should not know anything about how the data in the model is manipulated in the view.
+ Controllers should not know anything about how the data is persisted beyond the model.
+
+
+public ActionResult Index()
+        {
+            return View(); //right click Go to View, displays view in Home folder
+        }
+MVC -stateless
+mvc can be applied in web forms
+ActionResult -can be a view
+returns action
+in mvc, _Layout under Shared folder shows the code for Nav bar
+in web forms , site master shows the code for Nav bar
+RenderBody() - renders each page, based from Url request
+@ - value substitution,represents helper class
+HTML helpers make it easier to create the markup and produce clean markup
+@Html.LabelFor(m => m.UserName) 
+Value substitution
+You can call a method: 
+<span>@DateTime.Now.ToLongDateString()</span> 
+
+You can access properties: 
+<h3>@Model.Name</h3> 
+
+You can access local variables: 
+<li class="@style"> 
+
+
+A code block will look like this: 
+@{    if (!string.IsNullOrEmpty(Model.Greeting))  
+  {       <span>@Model.Greeting</span>   
+ }
+ } 
+
+ex.  <h2>@Model.Greeting</h2> 
+<%  %> -ASPX
+@ -Razor
+web config - configuration settings
+action name - Index
+controller name - profile
+@Html.ActionLink - contains link text, action, controller
+
+ @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+           
+            same with <label class="control-label col-md-2"> Name</label> 
+shows bootstrap properties
+
+scaffolding - generates code based on context and models
+
+ Layout file- \Views\Shared\_Layout.cshtml
+  [HttpPost]- submit
+ [HttpGet]
+
+ExamContext : DBContext install Entity framework
+references right click manage nuget package
+base - dabatase or connection string
+
+-----------------------------------------------------------------------------------------------------
+Package Manager Console commands:(View/other windows)
+
+1 enable-migrations -contexttypename ExamContext
+2 add-migration InitialCreate
+
+update-database -Verbose
+
+3 update-database
+
+update-database -Verbose
+
+-----------------------------------------------------------------------------------------------------
+In Web.config
+after <configuration></configuration>
+<connectionStrings>
+    <add name ="ExamDB" connectionString="Data Source=(localdb)\ProjectsV13;AttachDbFilename=|DataDirectory|\ExamDB.mdf;Integrated Security=True"
+providerName="System.Data.SqlClient" />
+
+-----------------------------------------------------------------------------------------------------
+? - record can be a null value
+Dispose()- clears data in the memory
+
+
+
+
+  </connectionStrings>
+
+
+
+
+
+Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+
+
+Data Source=(localdb)\ProjectsV13;Initial Catalog=EXAMDB_454f2d2068134a1d808b0113119a9100;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False

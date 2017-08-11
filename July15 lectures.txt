@@ -1,0 +1,76 @@
+Web Forms
+System.Web.UI namespace 
+
+ Code First 
+-lets you define your data models using classes. 
+
+
+View-other windows-package manager controls
+commands
+enable-migrations -contexttypename ProductContext
+add-migration InitialCreate
+update-database
+
+
+<%@ Page Title="Welcome" Language="C#" MasterPageFile="~/Site.Master" 
+AutoEventWireup="true"
+ CodeBehind="Default.aspx.cs" Inherits="WingtipToys._Default" %>
+
+
+Web-Based Applications
+-Runs within an Internet browser 
+-Collection of one or more related files or components stored on a server
+-MessageBox dialog boxes are not used with Web applications 
+-Every postback trip to the server creates new object 
+Causes Web pages to be stateless
+
+Static Pages
+-Client-side application
+Provide no interaction with the user
+
+Dynamic Pages
+-Involve processing in addition to rendering the formatting HTML tags 
+One programming model is to use traditional or classic Active Server Pages (ASP) 
+_______________________________________________________________
+ASP.NET
+Newer model for Web development 
+Does not require writing code in a separate scripting language 
+Includes a number of classes as part of the .NET Framework 
+
+Two options for developing ASP.NET applications
+-Use the new ASP.NET Development Server
+-Second option: use Microsoft Internet Information Services (IIS) 
+
+
+To identify an ASP from an ASP.NET Web application, look at file extensions
+-ASP Web page ends with an .asp file extension 
+-ASP.NET Web page ends with an .aspx file extension 
+
+
+
+
+Code-Behind File
+Where the programming logic resides  
+Stores event-handler methods
+
+-No Main( ) method 
+-Page_Load( ) event handler 
+-Can debug and execute Web application from within the IDE 
+-No hidden .designer.cs file as with Windows apps
+
+
+-Default.aspx created and automatically opened in Source view 
+-App_Data folder is automatically created
+
+
+File ending in .aspx holds the HTML tags
+First two lines in the .aspx markup file are called page directives
+Page directives are delimited with <%@ and %>
+
+runat=server - run as server control
+
+Visual Studio prefixes the control name with <asp:control and ends the tag with /asp:control>
+Also runat= "server " appended
+<asp:control attributes runat="server " /asp:control>
+Stored in HTML document – file ending with .aspx extension 
+

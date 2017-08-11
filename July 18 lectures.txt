@@ -1,0 +1,154 @@
+Topic: REST API
+
+
+graph.facebook.com/youtube
+
+retrieve http request - then pass it to the app
+REST API
+Representational state transfer, Application Programming Interface 
+
+Areas folder - help page, documentation page
+
+ // PUT: api/Exams/5- db.Entry(exam).State = EntityState.Modified;\
+ 
+steps:
+ASP.NET Web Application Project
+template- MVC,change authentication- no authentication
+Open Views\Shared\_Layout.cshtml, and make the following changes:
+<li>@Html.ActionLink("Students", "Index", "Student")</li> (text link, action link, controller), add menus
+Views\Home\Index.cshtml- replace the contents of the file
+In the Package Manager Console window enter the command-
+Install-Package EntityFramework
+
+Create Models- Exam.cs, Student, Enrollement, Course
+Create the Database Context, create folder Dal,SchoolContext.cs,
+Set up EF to initialize the database with test data- SchoolInitializer.cs
+To tell Entity Framework to use your initializer class, add an element to the entityFramework 
+element in the application Web.config file (in the root)
+Set up EF to use a SQL Server Express LocalDB database-in Web.config file
+
+<connectionStrings>
+<add name="SchoolContext" connectionString="Data Source=(LocalDb)\v11.0;
+Initial Catalog=ContosoUniversity1;Integrated Security=SSPI;" providerName="System.Data.SqlClient"/>
+</connectionStrings>
+
+The connection string you've added specifies that Entity Framework will use a LocalDB database
+ named ContosoUniversity1.mdf. (The database doesn't exist yet; EF will create it.)
+
+Creating a Student Controller and Views
+1Right-click the Controllers folder in Solution Explorer, select Add, and then click New Scaffolded Item.
+2. In the Add Scaffold dialog box, select MVC 5 Controller with views, using Entity Framework.
+
+3. In the Add Controller dialog box, make the following selections and then click Add:
+o Controller name: StudentController.
+o Model class: Student (ContosoUniversity.Models). (If you don't see this option in the drop-down list,
+ build the project and try again.)
+o Data context class: SchoolContext (ContosoUniversity.DAL).
+o Leave the default values for the other fields.
+
+
+When you click Add, the scaffolder creates a StudentController.cs file 
+and a set of views (.cshtml files) that work with the controller. 
+In the future when you create projects that use Entity Framework
+ you can also take advantage of some additional functionality of the 
+scaffolder: just create your first model class, don't create a connection string, 
+and then in the Add Controller box specify new context class. 
+The scaffolder will create your DbContext class and your connection 
+string as well as the controller and views.
+
+View the Database
+You can use either Server Explorer(database explorer)
+ or SQL Server Object Explorer (SSOX)
+
+The ContosoUniversity1.mdf and .ldf database files are in the C:\Users\<yourusername> folder.
+
+Conventions
+The pluralized forms of entity class names are used as table names.
+? Entity property names are used for column names.
+? Entity properties that are named ID or classnameID are recognized as primary key properties.
+? A property is interpreted as a foreign key property if it's named <navigation property name><primary key property name> 
+(for example, StudentID for the Student navigation property since the Student entity's primary key is ID). Foreign key properties can also be named the same simply <primary key property name> (for example, EnrollmentID since the Enrollment entity's primary key is EnrollmentID).
+
+
+
+The Student\Index.cshtml view displays this list in a table:
+<table>
+<tr>
+
+<th>
+@Html.DisplayNameFor(model => model.LastName)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.FirstMidName)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.EnrollmentDate)
+</th>
+<th></th>
+</tr>
+
+Press CTRL+F5 to run the project. 
+(If you get a "Cannot create Shadow Copy" error, close the browser and try again.)
+Click the Students tab to see the test data that the Seed method inserted. Depending on how narrow your browser window is, you'll see the Student tab link in the top address bar or you'll have to click the upper right corner to see the link.
+
+
+
+controller - ExamsController.cs
+need sa controller
+using System.Web.Mvc;
+using MyApiSample.Models;
+using MyApiSample.Helper;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+
+Modify index()
+
+
+
+
+	-MyFirstWebApiContext.cs (auto generated)
+Webconfig - check connection string (auto generated)
+package manager console - input migration scripts
+check default project in package manager console (myfirstweb api)
+
+____________________________________________________________________
+package manager console migration scripts
+
+enable-migrations -StartUpProjectName MyFirstWebApi 
+add-migration InitialMigration
+ update-database -Verbose   (output:Running Seed method.)
+____________________________________________________________________
+
+DAL data access layer
+
+ Install-Package Swashbuckle -Version 5.2.1
+
+in address bar : http://localhost:51282/swagger/ui/index#!/Exams/Exams_GetExams
+_________________________________________________________________
+<connectionStrings>
+    <add name="MyFirstWebApiContext" connectionString="Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=MyFirstWebApiContext-20170718104246; Integrated Security=True; MultipleActiveResultSets=True; AttachDbFilename=|DataDirectory|MyFirstWebApiContext-20170718104246.mdf" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+
+
+
+
+   public async Task<string> GetData() - async method lacks await operator
+ GetAsync -returns tasks and needs to be await
+await shd be under async method
+
+public IQueryable<Exam> GetExams()
+        {
+           // return db.Exams;- comment out
+        }
+
+in examscontroller of mvc app add using MyFirstMVCApp.Helper;
+
+
+The Bind attribute protects against over-posting. For example, suppose the Student entity includes 
+a Secret property that you don't want this web page to update.
+Even if you don't have a Secret field on the web page, a hacker could use a tool such as fiddler, 
+or write some JavaScript, to post a Secret form value. Without the Bind attribute
+ limiting the fields that the model binder uses when it creates a Student instance, 
+the model binder would pick up that Secret form value and use it to update the Student entity instance. 
+Then whatever value the hacker specified for the Secret form field would be updated in your database. 
+The following image shows the fiddler tool adding the Secret field (with the value "OverPost") to the posted form values.
